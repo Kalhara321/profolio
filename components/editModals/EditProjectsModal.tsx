@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Save, FolderGit2, Plus, Trash2 } from "lucide-react";
+import { X, Save, FolderGit2, Plus, Trash2, ImageIcon } from "lucide-react";
 import { usePortfolio } from "@/context/PortfolioContext";
-import { ProjectData } from "@/data/defaultPortfolioData";
+import { DEFAULT_COVER_ADJUST, ProjectData } from "@/data/defaultPortfolioData";
+import ProjectCoverEditor from "@/components/ProjectCoverEditor";
 
 export default function EditProjectsModal() {
   const { activeEditModal, closeEditModal, data, updateProjects } = usePortfolio();
@@ -29,14 +30,59 @@ export default function EditProjectsModal() {
       description: "Description of your new project...",
       features: ["Feature 1", "Feature 2"],
       tech: ["Java", "React"],
-      github: "https://github.com/thisunkalhara",
+      github: "https://github.com/Kalhara321",
       tag: "Full-Stack Project",
+      coverImage: "",
+      coverAdjust: { ...DEFAULT_COVER_ADJUST },
     };
     setProjects([...projects, newProj]);
   };
 
   const handleRemoveProject = (index: number) => {
     setProjects(projects.filter((_, i) => i !== index));
+  };
+
+  const handleCoverImageUpload = (index: number, file: File | null) => {
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Please select a valid image file.");
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert("Image must be smaller than 2MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const updated = [...projects];
+      updated[index] = {
+        ...updated[index],
+        coverImage: reader.result as string,
+        coverAdjust: { ...DEFAULT_COVER_ADJUST },
+      };
+      setProjects(updated);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleCoverAdjustChange = (
+    index: number,
+    coverAdjust: ProjectData["coverAdjust"]
+  ) => {
+    handleProjectChange(index, "coverAdjust", coverAdjust);
+  };
+
+  const handleRemoveCover = (index: number) => {
+    const updated = [...projects];
+    updated[index] = {
+      ...updated[index],
+      coverImage: "",
+      coverAdjust: { ...DEFAULT_COVER_ADJUST },
+    };
+    setProjects(updated);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -122,6 +168,63 @@ export default function EditProjectsModal() {
                     onChange={(e) => handleProjectChange(idx, "description", e.target.value)}
                     className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs resize-none"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 font-semibold uppercase mb-1 flex items-center gap-1.5">
+                    <ImageIcon className="w-3.5 h-3.5 text-blue-400" />
+                    Cover Image
+                  </label>
+                  <div className="space-y-3">
+                    {proj.coverImage && (
+                      <div className="space-y-2">
+                        <ProjectCoverEditor
+                          imageSrc={proj.coverImage}
+                          adjust={{ ...DEFAULT_COVER_ADJUST, ...proj.coverAdjust }}
+                          onChange={(coverAdjust) => handleCoverAdjustChange(idx, coverAdjust)}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveCover(idx)}
+                          className="px-2 py-1 rounded-lg bg-red-950/60 border border-red-900/60 text-red-300 text-[10px] font-semibold hover:bg-red-600/90 hover:text-white transition-colors"
+                        >
+                          Remove cover image
+                        </button>
+                      </div>
+                    )}
+                    <input
+                      type="url"
+                      placeholder="https://example.com/image.jpg or /projects/cover.png"
+                      value={proj.coverImage?.startsWith("data:") ? "" : proj.coverImage || ""}
+                      onChange={(e) => {
+                        const updated = [...projects];
+                        updated[idx] = {
+                          ...updated[idx],
+                          coverImage: e.target.value,
+                          coverAdjust: e.target.value
+                            ? { ...DEFAULT_COVER_ADJUST, ...updated[idx].coverAdjust }
+                            : { ...DEFAULT_COVER_ADJUST },
+                        };
+                        setProjects(updated);
+                      }}
+                      className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs"
+                    />
+                    <div className="flex items-center gap-3">
+                      <label className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs font-semibold cursor-pointer hover:border-blue-500/40 hover:text-white transition-all">
+                        <ImageIcon className="w-3.5 h-3.5 text-blue-400" />
+                        Upload from device
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => handleCoverImageUpload(idx, e.target.files?.[0] || null)}
+                        />
+                      </label>
+                      <span className="text-[10px] text-slate-500">
+                        URL, /public path, or upload (max 2MB)
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

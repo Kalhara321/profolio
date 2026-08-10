@@ -38,7 +38,7 @@ interface Repository {
 }
 
 export default function GithubSection() {
-  const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "thisunkalhara";
+  const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "Kalhara321";
   const [profile, setProfile] = useState<GithubProfile | null>(null);
   const [repos, setRepos] = useState<Repository[]>([]);
   const [loading, setLoading] = useState(true);

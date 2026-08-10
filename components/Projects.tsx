@@ -13,6 +13,7 @@ import {
   Code2,
 } from "lucide-react";
 import { usePortfolio } from "@/context/PortfolioContext";
+import { getCoverImageStyle } from "@/components/ProjectCoverEditor";
 
 const projectIcons: Record<string, any> = {
   "pet-care": PawPrint,
@@ -78,13 +79,28 @@ export default function Projects() {
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
                 className="glass-card rounded-2xl border border-slate-800/80 hover:border-blue-500/40 flex flex-col justify-between overflow-hidden group transition-all duration-300 shadow-xl"
               >
-                {/* Project Graphic Banner Header */}
-                <div className="relative h-48 sm:h-56 bg-slate-950 p-6 flex flex-col justify-between overflow-hidden border-b border-slate-800/80">
-                  <div className={`absolute inset-0 bg-gradient-to-tr ${gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
-                  <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+                {/* Project Cover Banner */}
+                <div className="relative h-48 sm:h-56 bg-slate-950 flex flex-col justify-between overflow-hidden border-b border-slate-800/80">
+                  {proj.coverImage ? (
+                    <>
+                      <img
+                        src={proj.coverImage}
+                        alt={`${proj.title} cover`}
+                        className="absolute inset-0 w-full h-full"
+                        style={getCoverImageStyle(proj.coverAdjust)}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/70 to-[#020617]/30" />
+                    </>
+                  ) : (
+                    <>
+                      <div className={`absolute inset-0 bg-gradient-to-tr ${gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
+                      <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+                    </>
+                  )}
 
+                  <div className="relative z-10 p-6 flex flex-col justify-between h-full">
                   {/* Top Tag & Icon */}
-                  <div className="relative z-10 flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <span className="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-300 font-mono">
                       {proj.tag}
                     </span>
@@ -94,10 +110,11 @@ export default function Projects() {
                   </div>
 
                   {/* Title */}
-                  <div className="relative z-10">
+                  <div>
                     <h3 className="text-2xl font-bold text-white tracking-wide group-hover:text-blue-300 transition-colors">
                       {proj.title}
                     </h3>
+                  </div>
                   </div>
                 </div>
 

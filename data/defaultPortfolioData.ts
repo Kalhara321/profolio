@@ -17,6 +17,18 @@ export interface SkillCategoryData {
   skills: { name: string; level: string; color: string }[];
 }
 
+export interface CoverImageAdjust {
+  scale: number;
+  posX: number;
+  posY: number;
+}
+
+export const DEFAULT_COVER_ADJUST: CoverImageAdjust = {
+  scale: 1,
+  posX: 50,
+  posY: 50,
+};
+
 export interface ProjectData {
   id: string;
   title: string;
@@ -26,6 +38,8 @@ export interface ProjectData {
   github: string;
   demo?: string;
   tag: string;
+  coverImage?: string;
+  coverAdjust?: CoverImageAdjust;
 }
 
 export interface ExperienceData {
@@ -72,7 +86,7 @@ export const defaultPortfolioData: PortfolioData = {
     expectedGraduation: "2028",
     email: "thisun.kalhara@example.com",
     phone: "+94 (77) 123 4567",
-    githubUrl: "https://github.com/thisunkalhara",
+    githubUrl: "https://github.com/Kalhara321",
     linkedinUrl: "https://linkedin.com/in/thisunkalhara",
   },
   skills: [
@@ -137,9 +151,10 @@ export const defaultPortfolioData: PortfolioData = {
         "Responsive UI",
       ],
       tech: ["Java", "Spring Boot", "MySQL", "HTML", "CSS", "JavaScript"],
-      github: "https://github.com/thisunkalhara",
-      demo: "https://github.com/thisunkalhara",
+      github: "https://github.com/Kalhara321",
+      demo: "https://github.com/Kalhara321",
       tag: "Full-Stack Web Application",
+      coverImage: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80",
     },
     {
       id: "music-player",
@@ -154,8 +169,9 @@ export const defaultPortfolioData: PortfolioData = {
         "ExoPlayer / Media3 Integration",
       ],
       tech: ["Java", "Kotlin", "Android Studio", "Media3", "ExoPlayer"],
-      github: "https://github.com/thisunkalhara",
+      github: "https://github.com/Kalhara321",
       tag: "Android Mobile App",
+      coverImage: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=800&q=80",
     },
     {
       id: "fb-pirate",
@@ -169,8 +185,9 @@ export const defaultPortfolioData: PortfolioData = {
         "CLI & Scripted Automation",
       ],
       tech: ["Node.js", "yt-dlp", "JavaScript"],
-      github: "https://github.com/thisunkalhara",
+      github: "https://github.com/Kalhara321",
       tag: "CLI Utility & Backend Tool",
+      coverImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80",
     },
     {
       id: "brooks-anime",
@@ -185,8 +202,9 @@ export const defaultPortfolioData: PortfolioData = {
         "Responsive Glassmorphic UI",
       ],
       tech: ["Next.js", "AnimeKai API", "Vercel", "Tailwind CSS"],
-      github: "https://github.com/thisunkalhara",
+      github: "https://github.com/Kalhara321",
       tag: "Web Streaming App",
+      coverImage: "https://images.unsplash.com/photo-1574267432644-f6102eae4cab?w=800&q=80",
     },
   ],
   experience: [
