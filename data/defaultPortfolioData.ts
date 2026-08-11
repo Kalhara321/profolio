@@ -10,6 +10,11 @@ export interface PersonalInfo {
   phone: string;
   githubUrl: string;
   linkedinUrl: string;
+  profileImage?: string;
+  imageScale?: number;
+  imagePosX?: number;
+  imagePosY?: number;
+  imageFit?: "cover" | "contain";
 }
 
 export interface SkillCategoryData {

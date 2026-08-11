@@ -54,13 +54,27 @@ export default function About() {
             <div className="glass-card rounded-2xl p-8 border border-slate-800/80 flex flex-col items-center text-center h-full relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-2xl group-hover:bg-blue-600/20 transition-all duration-500" />
               
-              {/* Photo Avatar Placeholder */}
+              {/* Photo Avatar Card - Crisp, Unmasked & Adjustable */}
               <div className="relative mb-6">
-                <div className="w-36 h-36 rounded-full p-1 bg-gradient-to-tr from-blue-600 via-blue-400 to-indigo-600 shadow-[0_0_25px_rgba(37,99,235,0.4)]">
-                  <div className="w-full h-full rounded-full bg-[#020617] flex items-center justify-center overflow-hidden relative">
-                    <div className="absolute inset-0 bg-gradient-to-b from-blue-900/40 to-slate-950 flex items-center justify-center">
-                      <User className="w-20 h-20 text-blue-400/90" />
-                    </div>
+                <div className="w-36 h-36 rounded-full p-[2px] bg-gradient-to-tr from-blue-600 via-blue-400 to-indigo-600 shadow-[0_0_25px_rgba(37,99,235,0.4)]">
+                  <div className="w-full h-full rounded-full bg-[#020617] overflow-hidden relative">
+                    {personal.profileImage ? (
+                      <img
+                        src={personal.profileImage}
+                        alt={personal.name}
+                        className="w-full h-full"
+                        style={{
+                          objectFit: personal.imageFit || "cover",
+                          objectPosition: `${personal.imagePosX ?? 50}% ${personal.imagePosY ?? 50}%`,
+                          transform: `scale(${personal.imageScale ?? 1})`,
+                          transformOrigin: "center center",
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-[#090d1a]">
+                        <User className="w-20 h-20 text-blue-400" />
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="absolute bottom-1 right-1 w-6 h-6 rounded-full bg-emerald-500 border-4 border-[#020617] shadow-md" title="Active & Ready" />
