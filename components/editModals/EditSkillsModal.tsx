@@ -2,13 +2,25 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Save, Wrench, Plus, Trash2 } from "lucide-react";
+import { X, Save, Wrench, Plus, Trash2, Tag } from "lucide-react";
 import { usePortfolio } from "@/context/PortfolioContext";
+
+const colorPresets = [
+  { label: "Blue / Indigo", value: "from-blue-500 to-indigo-600" },
+  { label: "Orange / Red", value: "from-orange-500 to-red-500" },
+  { label: "Green / Emerald", value: "from-green-500 to-emerald-600" },
+  { label: "Yellow / Amber", value: "from-yellow-400 to-amber-500" },
+  { label: "Purple / Pink", value: "from-purple-500 to-pink-500" },
+  { label: "Teal / Cyan", value: "from-teal-400 to-cyan-500" },
+  { label: "Slate / Silver", value: "from-slate-200 to-slate-400" },
+];
 
 export default function EditSkillsModal() {
   const { activeEditModal, closeEditModal, data, updateSkills } = usePortfolio();
   const [skills, setSkills] = useState(data.skills);
   const [newSkillName, setNewSkillName] = useState("");
+  const [newSkillLevel, setNewSkillLevel] = useState("Advanced");
+  const [newSkillColor, setNewSkillColor] = useState("from-blue-500 to-indigo-600");
   const [selectedCatIndex, setSelectedCatIndex] = useState(0);
 
   useEffect(() => {
@@ -22,8 +34,8 @@ export default function EditSkillsModal() {
       const updated = [...skills];
       updated[selectedCatIndex].skills.push({
         name: newSkillName.trim(),
-        level: "Advanced",
-        color: "from-blue-500 to-indigo-600",
+        level: newSkillLevel,
+        color: newSkillColor,
       });
       setSkills(updated);
       setNewSkillName("");
@@ -60,62 +72,111 @@ export default function EditSkillsModal() {
 
           <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
             <Wrench className="w-5 h-5 text-blue-400" />
-            Edit Skills & Technical Stack
+            Edit Skills & Technical Parameters
           </h3>
 
           <form onSubmit={handleSubmit} className="space-y-6 text-xs font-sans">
             
-            {/* Add New Skill Bar */}
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-3">
-              <span className="block font-semibold uppercase text-slate-300">Add Skill to Category</span>
-              <div className="flex gap-2">
-                <select
-                  value={selectedCatIndex}
-                  onChange={(e) => setSelectedCatIndex(Number(e.target.value))}
-                  className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs"
-                >
-                  {skills.map((cat, idx) => (
-                    <option key={cat.category} value={idx}>
-                      {cat.category}
-                    </option>
-                  ))}
-                </select>
+            {/* Add New Skill Bar with Parameters */}
+            <div className="p-5 rounded-2xl bg-slate-950/90 border border-slate-800 space-y-4">
+              <span className="block font-bold uppercase text-white text-xs flex items-center gap-2">
+                <Tag className="w-4 h-4 text-blue-400" />
+                Add Skill with Custom Parameters
+              </span>
 
-                <input
-                  type="text"
-                  value={newSkillName}
-                  onChange={(e) => setNewSkillName(e.target.value)}
-                  placeholder="Skill name (e.g. Docker, Redis)"
-                  className="flex-1 px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:border-blue-500 focus:outline-none"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">Target Category</label>
+                  <select
+                    value={selectedCatIndex}
+                    onChange={(e) => setSelectedCatIndex(Number(e.target.value))}
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:border-blue-500 focus:outline-none"
+                  >
+                    {skills.map((cat, idx) => (
+                      <option key={cat.category} value={idx}>
+                        {cat.category}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-                <button
-                  type="button"
-                  onClick={handleAddSkill}
-                  className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold flex items-center gap-1"
-                >
-                  <Plus className="w-4 h-4" />
-                  Add
-                </button>
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">Skill Name</label>
+                  <input
+                    type="text"
+                    value={newSkillName}
+                    onChange={(e) => setNewSkillName(e.target.value)}
+                    placeholder="e.g. Docker, Kubernetes"
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
               </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">Proficiency Level Parameter</label>
+                  <select
+                    value={newSkillLevel}
+                    onChange={(e) => setNewSkillLevel(e.target.value)}
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:border-blue-500 focus:outline-none"
+                  >
+                    <option value="Advanced">Advanced</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Expert">Expert</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Learning">Learning</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">Color Gradient Theme</label>
+                  <select
+                    value={newSkillColor}
+                    onChange={(e) => setNewSkillColor(e.target.value)}
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:border-blue-500 focus:outline-none"
+                  >
+                    {colorPresets.map((c) => (
+                      <option key={c.value} value={c.value}>
+                        {c.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleAddSkill}
+                className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md"
+              >
+                <Plus className="w-4 h-4" />
+                Add Skill Parameter
+              </button>
             </div>
 
             {/* Existing Skills Listing */}
             <div className="space-y-4">
               {skills.map((cat, catIdx) => (
                 <div key={cat.category} className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
-                  <h4 className="font-bold text-white mb-3 text-sm">{cat.category}</h4>
+                  <h4 className="font-bold text-white mb-3 text-sm flex items-center justify-between">
+                    <span>{cat.category}</span>
+                    <span className="text-xs font-mono text-slate-400">({cat.skills.length} skills)</span>
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     {cat.skills.map((skill, skillIdx) => (
                       <span
                         key={skill.name}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-xs"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-xs"
                       >
-                        {skill.name}
+                        <span className={`w-2 h-2 rounded-full bg-gradient-to-r ${skill.color || "from-blue-500 to-indigo-500"}`} />
+                        <span className="font-semibold">{skill.name}</span>
+                        <span className="text-[10px] text-blue-400 bg-blue-950/60 px-1.5 py-0.5 rounded font-mono">
+                          {skill.level}
+                        </span>
                         <button
                           type="button"
                           onClick={() => handleRemoveSkill(catIdx, skillIdx)}
-                          className="text-slate-400 hover:text-red-400"
+                          className="text-slate-400 hover:text-red-400 transition-colors ml-1"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
