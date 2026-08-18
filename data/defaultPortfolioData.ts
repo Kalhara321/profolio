@@ -84,7 +84,7 @@ export const defaultPortfolioData: PortfolioData = {
       "Android Developer",
       "Full Stack Developer",
     ],
-    bio: "I am an aspiring software engineer who enjoys backend development, web technologies, and Android application development. I love creating practical software solutions while continuously improving my technical skills.",
+    bio: "Passionate Information Technology undergraduate with hands-on experience in Java, Spring Boot, Next.js, React, Android, and backend systems. I enjoy building scalable applications and solving real-world problems.",
     location: "Polgahawela, Sri Lanka",
     university: "Sri Lanka Institute of Information Technology (SLIIT)",
     degree: "Bachelor of Science (Hons) in Information Technology",

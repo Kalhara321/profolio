@@ -1,0 +1,362 @@
+{
+  "personal": {
+    "name": "Thisun Kalhara",
+    "roles": [
+      "Information Technology Undergraduate",
+      "Backend Developer",
+      "Java & Python Developer",
+      "Android Developer",
+      "Full Stack Developer"
+    ],
+    "bio": "3rd-year IT undergraduate and aspiring software engineer who enjoys backend development, web technologies, and Android application development. Experienced in building practical software solutions spanning AI-powered desktop assistants, mobile applications, and IoT automation systems.",
+    "location": "Polgahawela, Sri Lanka",
+    "university": "Sri Lanka Institute of Information Technology (SLIIT)",
+    "degree": "Bachelor of Science (Hons) in Information Technology",
+    "expectedGraduation": "2028 (Year 3, Semester 1)",
+    "email": "kalharamax822@gmail.com",
+    "phone": "+94 76 206 9822",
+    "githubUrl": "https://github.com/Kalhara321",
+    "linkedinUrl": "https://linkedin.com/in/thisunkalhara",
+    "profileImage": "/uploads/image-1787080933594.png",
+    "imageScale": 1.95,
+    "imagePosX": 50,
+    "imagePosY": 17,
+    "imageFit": "cover"
+  },
+  "skills": [
+    {
+      "category": "Programming Languages",
+      "skills": [
+        {
+          "name": "Java",
+          "level": "Advanced",
+          "color": "from-orange-500 to-red-500"
+        },
+        {
+          "name": "Python",
+          "level": "Advanced",
+          "color": "from-blue-500 to-yellow-500"
+        },
+        {
+          "name": "JavaScript",
+          "level": "Advanced",
+          "color": "from-yellow-400 to-amber-500"
+        },
+        {
+          "name": "HTML/CSS",
+          "level": "Advanced",
+          "color": "from-orange-400 to-red-600"
+        },
+        {
+          "name": "SQL",
+          "level": "Advanced",
+          "color": "from-blue-400 to-cyan-500"
+        },
+        {
+          "name": "Kotlin",
+          "level": "Intermediate",
+          "color": "from-purple-500 to-pink-500"
+        }
+      ]
+    },
+    {
+      "category": "Frameworks & Libraries",
+      "skills": [
+        {
+          "name": "Node.js",
+          "level": "Advanced",
+          "color": "from-emerald-400 to-green-600"
+        },
+        {
+          "name": "Next.js",
+          "level": "Advanced",
+          "color": "from-slate-200 to-slate-400"
+        },
+        {
+          "name": "Spring Boot",
+          "level": "Advanced",
+          "color": "from-green-500 to-emerald-600"
+        },
+        {
+          "name": "React",
+          "level": "Advanced",
+          "color": "from-cyan-400 to-blue-500"
+        },
+        {
+          "name": "Tailwind CSS",
+          "level": "Advanced",
+          "color": "from-teal-400 to-cyan-500"
+        }
+      ]
+    },
+    {
+      "category": "Databases",
+      "skills": [
+        {
+          "name": "MySQL",
+          "level": "Advanced",
+          "color": "from-blue-600 to-cyan-600"
+        },
+        {
+          "name": "MongoDB",
+          "level": "Intermediate",
+          "color": "from-green-500 to-emerald-500"
+        },
+        {
+          "name": "Oracle DB",
+          "level": "Intermediate",
+          "color": "from-red-500 to-orange-500"
+        }
+      ]
+    },
+    {
+      "category": "Tools & Platforms",
+      "skills": [
+        {
+          "name": "Git / GitHub",
+          "level": "Advanced",
+          "color": "from-purple-400 to-indigo-500"
+        },
+        {
+          "name": "Vercel",
+          "level": "Advanced",
+          "color": "from-slate-200 to-slate-400"
+        },
+        {
+          "name": "Railway",
+          "level": "Intermediate",
+          "color": "from-purple-500 to-pink-500"
+        },
+        {
+          "name": "VS Code",
+          "level": "Advanced",
+          "color": "from-blue-400 to-cyan-500"
+        },
+        {
+          "name": "Postman",
+          "level": "Advanced",
+          "color": "from-orange-500 to-amber-500"
+        },
+        {
+          "name": "Android Studio",
+          "level": "Intermediate",
+          "color": "from-green-400 to-emerald-600"
+        }
+      ]
+    },
+    {
+      "category": "Operating Systems",
+      "skills": [
+        {
+          "name": "Linux (Ubuntu)",
+          "level": "Intermediate",
+          "color": "from-orange-500 to-amber-600"
+        },
+        {
+          "name": "Windows",
+          "level": "Advanced",
+          "color": "from-blue-400 to-indigo-500"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "sara-ai",
+      "title": "SARA AI Agent",
+      "description": "Local JARVIS-inspired AI assistant for Windows desktop capable of executing 100+ Windows commands through voice and text interactions.",
+      "features": [
+        "100+ Windows Voice & Text Commands",
+        "Qwen 2.5 Intent Recognition & JSON Routing",
+        "Local AI Processing with Ollama & Whisper",
+        "SQLite Memory & Safety Confirmations",
+        "Modular Architecture & Plugin System"
+      ],
+      "tech": [
+        "Python",
+        "Qwen 2.5",
+        "Ollama",
+        "CustomTkinter",
+        "Whisper",
+        "SQLite"
+      ],
+      "github": "https://github.com/Kalhara321",
+      "tag": "AI Desktop Assistant",
+      "coverImage": "/uploads/image-1787080996089.png",
+      "coverAdjust": {
+        "scale": 1,
+        "posX": 50,
+        "posY": 50
+      }
+    },
+    {
+      "id": "music-player",
+      "title": "Android Music Player",
+      "description": "Feature-rich offline audio player with equalizer, real-time tempo/pitch/speed adjustments, dynamic album artwork retrieval, and smart local indexing.",
+      "features": [
+        "Built-in Equalizer, Tempo & Pitch Controls",
+        "Dynamic Online Album Artwork Retrieval",
+        "Smart Local Audio Library Indexing",
+        "Custom Playlist Management & Favorites",
+        "ExoPlayer / Media3 Engine Integration"
+      ],
+      "tech": [
+        "Android Studio",
+        "Java / Kotlin",
+        "Android SDK",
+        "Media3",
+        "ExoPlayer"
+      ],
+      "github": "https://github.com/Kalhara321",
+      "tag": "Android Mobile App",
+      "coverImage": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=800&q=80"
+    },
+    {
+      "id": "water-tank",
+      "title": "Water Tank Monitoring & Automation System",
+      "description": "IoT-based water level monitoring system measuring tank levels as live percentages with ESP32 display, audible alarms, and real-time phone alerts.",
+      "features": [
+        "Live Tank Level Measurement (%)",
+        "ESP32 Onboard Display & Audible Alarms",
+        "Real-Time Phone Notification Alerts",
+        "Critical Threshold Alarms"
+      ],
+      "tech": [
+        "Arduino",
+        "ESP32",
+        "Water Level Sensors",
+        "IoT"
+      ],
+      "github": "https://github.com/Kalhara321",
+      "tag": "IoT Automation Solution",
+      "coverImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
+    },
+    {
+      "id": "pet-care",
+      "title": "Pet Care Management System",
+      "description": "Developed a full-stack Pet Care Management System for managing pet profiles, appointments, and grooming services.",
+      "features": [
+        "Appointment Scheduling",
+        "Pet Profile CRUD",
+        "Admin Dashboard",
+        "Role-based Authentication"
+      ],
+      "tech": [
+        "Java",
+        "Spring Boot",
+        "MySQL",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "github": "https://github.com/Kalhara321",
+      "tag": "Full-Stack Web Application",
+      "coverImage": "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80"
+    },
+    {
+      "id": "proj-1787081012366",
+      "title": "Brooks Anime",
+      "description": "Brooks Anime is a modern anime discovery and streaming platform designed with a cinematic, responsive interface. Users can explore trending anime, browse seasonal releases and genres, search for anime, view detailed anime information, explore episodes, and watch available video content. The platform integrates anime APIs for dynamic metadata and is designed with a scalable architecture for future authentication, watchlists, watch history, recommendations, and personalized user features.",
+      "features": [
+        "Trending Anime",
+        "Anime Search",
+        "Seasonal Anime",
+        "Genre Categories",
+        "Anime Details",
+        "Episode Browser",
+        "Video Player",
+        "Streaming Integration",
+        "Watch History",
+        "Responsive UI",
+        "Dark Neon UI",
+        "Related Anime",
+        "Ratings & Genres",
+        "Trailer Support",
+        "Error Handling"
+      ],
+      "tech": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Node.js",
+        "REST APIs",
+        "Jikan API",
+        "Consumet API"
+      ],
+      "github": "https://github.com/Kalhara321",
+      "tag": "Full-Stack Project",
+      "coverImage": "/uploads/image-1787081115602.png",
+      "coverAdjust": {
+        "scale": 1,
+        "posX": 50,
+        "posY": 50
+      }
+    },
+    {
+      "id": "proj-1787081180050",
+      "title": "FB Pirate",
+      "description": "FB Pirate is a multi-platform media downloader that allows users to download publicly accessible videos and media from popular platforms such as Facebook, YouTube, Instagram, and TikTok. The project provides a simple, fast, and responsive interface where users can paste a supported media URL and retrieve available downloadable content.",
+      "features": [
+        "ebook video downloading",
+        "YouTube video downloading",
+        "Instagram media downloading",
+        "TikTok video downloading",
+        "URL-based media detection",
+        "Multiple media formats and quality options",
+        "Responsive interface",
+        "Fast download processing",
+        "Cross-platform support"
+      ],
+      "tech": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "REST API",
+        "Tailwind CSS"
+      ],
+      "github": "https://github.com/Kalhara321",
+      "tag": "Full-Stack Project",
+      "coverImage": "/uploads/image-1787081357131.png",
+      "coverAdjust": {
+        "scale": 1,
+        "posX": 50,
+        "posY": 50
+      }
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp-1",
+      "company": "Shopping Expo",
+      "role": "Sales Associate",
+      "type": "Seasonal Full-Time",
+      "period": "2024 – 2025",
+      "description": "Engaged with diverse client requests and maintained high customer satisfaction ratings during high-traffic exhibition events. Collaborated with cross-functional teams to streamline retail operations.",
+      "responsibilities": [
+        "Customer Service",
+        "Communication",
+        "Sales",
+        "Teamwork"
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "id": "ach-1",
+      "title": "Crew404 CodeJam Participant",
+      "category": "Hackathon & Competitive Programming",
+      "description": "Participated in the intense Crew404 CodeJam hackathon, building rapid software solutions under strict time constraints while collaborating with team members.",
+      "badge": "Hackathon"
+    },
+    {
+      "id": "ach-2",
+      "title": "University Innovation Exhibition",
+      "subtitle": "Developed Water Tank Monitoring & Automation System",
+      "category": "Hardware & Automation Solution",
+      "description": "Verified entry for the Water Tank Monitoring & Automation System, an automated sensor-based water resource management solution.",
+      "badge": "Engineering Project"
+    }
+  ]
+}

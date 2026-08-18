@@ -27,6 +27,7 @@ interface PortfolioContextType {
   updateProjects: (projects: ProjectData[]) => void;
   updateExperience: (experience: ExperienceData[]) => void;
   updateAchievements: (achievements: AchievementData[]) => void;
+  uploadImageFile: (file: File) => Promise<string>;
   resetToDefaults: () => void;
 }
 
@@ -42,30 +43,71 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [activeEditModal, setActiveEditModal] = useState<string | null>(null);
 
-  // Load persisted data & auth state on mount
+  // Fetch initial data from server (data/portfolioData.json) on mount
   useEffect(() => {
-    try {
-      const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (savedData) {
-        setData(JSON.parse(savedData));
+    async function loadPortfolioData() {
+      try {
+        const res = await fetch("/api/portfolio");
+        if (res.ok) {
+          const serverData = await res.json();
+          if (serverData && serverData.personal) {
+            setData(serverData);
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(serverData));
+          }
+        } else {
+          const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+          if (savedData) {
+            setData(JSON.parse(savedData));
+          }
+        }
+      } catch (e) {
+        console.error("Error fetching portfolio data from API:", e);
+        const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (savedData) {
+          setData(JSON.parse(savedData));
+        }
       }
+
       const savedAuth = localStorage.getItem(ADMIN_AUTH_KEY);
       if (savedAuth === "true") {
         setIsAdmin(true);
       }
-    } catch (e) {
-      console.error("Error reading localStorage:", e);
     }
+
+    loadPortfolioData();
   }, []);
 
-  // Save data helper
-  const saveData = (newData: PortfolioData) => {
+  // Save data helper - posts to /api/portfolio (writes data/portfolioData.json) & saves to localStorage
+  const saveData = async (newData: PortfolioData) => {
     setData(newData);
     try {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newData));
+      await fetch("/api/portfolio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newData),
+      });
     } catch (e) {
-      console.error("Error saving to localStorage:", e);
+      console.error("Error saving data:", e);
     }
+  };
+
+  // Upload image helper - posts to /api/upload (saves into public/uploads/)
+  const uploadImageFile = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to upload image.");
+    }
+
+    const result = await res.json();
+    return result.url; // e.g. "/uploads/image-1724012345.png"
   };
 
   const login = (password: string) => {
@@ -142,6 +184,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
         updateProjects,
         updateExperience,
         updateAchievements,
+        uploadImageFile,
         resetToDefaults,
       }}
     >

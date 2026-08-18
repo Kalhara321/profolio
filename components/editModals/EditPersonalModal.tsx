@@ -6,9 +6,10 @@ import { X, Save, User, Mail, Phone, MapPin, GraduationCap, Github, Linkedin, Pl
 import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function EditPersonalModal() {
-  const { activeEditModal, closeEditModal, data, updatePersonal } = usePortfolio();
+  const { activeEditModal, closeEditModal, data, updatePersonal, uploadImageFile } = usePortfolio();
   const [formData, setFormData] = useState(data.personal);
   const [newRole, setNewRole] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     setFormData(data.personal);
@@ -16,18 +17,30 @@ export default function EditPersonalModal() {
 
   if (activeEditModal !== "personal") return null;
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const base64Url = event.target?.result as string;
+      try {
+        setIsUploading(true);
+        const imageUrl = await uploadImageFile(file);
         setFormData((prev) => ({
           ...prev,
-          profileImage: base64Url,
+          profileImage: imageUrl,
         }));
-      };
-      reader.readAsDataURL(file);
+      } catch (err) {
+        console.error("Error uploading image to public/uploads/:", err);
+        // Fallback to FileReader Base64 if server fails
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          setFormData((prev) => ({
+            ...prev,
+            profileImage: event.target?.result as string,
+          }));
+        };
+        reader.readAsDataURL(file);
+      } finally {
+        setIsUploading(false);
+      }
     }
   };
 
